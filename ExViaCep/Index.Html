@@ -18,7 +18,21 @@
                 CEP RETORNADO
             </tr>
         </thead>
-        <tbody id="table"></tbody>
+        <tbody id="table">
+            {this.state.lista.map(element =>{
+                return(
+                    <tr key={element.cep}>
+                        <td>{element.logradouro}</td>
+                        <td>{element.complemento}</td>
+                        <td>{element.bairro}</td>
+                        <td>{element.localidade}</td>
+                        <td>{element.uf}</td>
+                        <td>{element.unidade}</td>
+                        <td>{element.ibge}</td>
+                        <td>{element.gia}</td>
+                    </tr>
+                )
+            })}
     </table>
     <script type="text/javascript">
 
@@ -26,8 +40,6 @@
         const getFormInputCep = document.querySelector("#textInput__cep");
         const getFormBtnCep = document.querySelector("#btn__cep");
         const getTableForm = document.querySelector('#table');
-
-        new xhr = XMLHttpRequest();
 
         let varCepItemComp = {
             cep: getFormInputCep.querySelector.value,
@@ -41,57 +53,53 @@
             gia: getFormInputCep.querySelector.value
         };
         
-        function preencherTabela(varCepItemComp) {
-        varCepItemComp.forEach((element) => {
-            const tr = document.createElement('tr');
-            const td_cep = document.createElement('td');
-            const td_logradouro = document.createElement('td');
-            const td_complemento = document.createElement('td');
-            const td_bairro = document.createElement('td');
-            const td_localidade = document.createElement('td');
-            const td_uf = document.createElement('td');
-            const td_unidade = document.createElement('td');
-            const td_ibge = document.createElement('td');
-            const td_gia = document.createElement('td');
+        // function preencherTabela(varCepItemComp) {
+        // varCepItemComp.forEach((element) => {
+        //     const tr = document.createElement('tr');
+        //     const td_cep = document.createElement('td');
+        //     const td_logradouro = document.createElement('td');
+        //     const td_complemento = document.createElement('td');
+        //     const td_bairro = document.createElement('td');
+        //     const td_localidade = document.createElement('td');
+        //     const td_uf = document.createElement('td');
+        //     const td_unidade = document.createElement('td');
+        //     const td_ibge = document.createElement('td');
+        //     const td_gia = document.createElement('td');
 
-            td_cep.textContent = element.cep;
-            td_logradouro.textContent = element.logradouro;
-            td_complemento.textContent = element.complemento;
-            td_bairro.textContent = element.bairro;
-            td_localidade.textContent = element.localidade;
-            td_uf.textContent = element.uf;
-            td_unidade.textContent = element.unidade;
-            td_ibge.textContent = element.ibge;
-            td_gia.textContent = element.gia;
+        //     td_cep.textContent = element.cep;
+        //     td_logradouro.textContent = element.logradouro;
+        //     td_complemento.textContent = element.complemento;
+        //     td_bairro.textContent = element.bairro;
+        //     td_localidade.textContent = element.localidade;
+        //     td_uf.textContent = element.uf;
+        //     td_unidade.textContent = element.unidade;
+        //     td_ibge.textContent = element.ibge;
+        //     td_gia.textContent = element.gia;
             
-            tabela.appendChild(tr);
-            tr.appendChild(td_cep);
-            tr.appendChild(td_logradouro);
-            tr.appendChild(td_complemento);
-            tr.appendChild(td_bairro);
-            tr.appendChild(td_localidade);
-            tr.appendChild(td_uf);
-            tr.appendChild(td_unidade);
-            tr.appendChild(td_ibge);
-            tr.appendChild(td_gia);
-            });
-        }
+        //     tabela.appendChild(tr);
+        //     tr.appendChild(td_cep);
+        //     tr.appendChild(td_logradouro);
+        //     tr.appendChild(td_complemento);
+        //     tr.appendChild(td_bairro);
+        //     tr.appendChild(td_localidade);
+        //     tr.appendChild(td_uf);
+        //     tr.appendChild(td_unidade);
+        //     tr.appendChild(td_ibge);
+        //     tr.appendChild(td_gia);
+        //     });
+        // }
 
-        getFormBtnCep.addEventListener('click', Element, Function =>{
+        getFormBtnCep.addEventListener = (Element) =>{
             event.preventDefault();
             var varCEP = varCepItemComp.filter(Element =>{
-                xhr.open('GET', "https://viacep.com.br/ws/"+Element.cep+"/json", true);
-                xhr.setRequestHeader('Content-Type','application/json; charset=utf-8');
-                xhr.send(varCepItemComp);
+                fetch("https://viacep.com.br/ws/"+Element.cep+"/json");
+                
             if(Element.cep === varCepItemComp.cep){
                 console.log()   
                 }
             });
             preencherTabela(varCepItemComp)
-        }
-
-
-
+        };
     </script>
 </body>
 </html>
